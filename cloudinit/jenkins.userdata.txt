@@ -1,0 +1,7 @@
+yum update -y
+yum install docker -y
+systemctl enable docker
+systemctl start docker
+docker pull jenkins/jenkins:lts
+docker volume create jenkins_home
+docker run -d -v jenkins_home:/var/jenkins_home --restart unless-stopped --name jenkins -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts
